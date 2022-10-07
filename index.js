@@ -1,28 +1,12 @@
-const option1 = document.getElementById("option1");
-const option2 = document.getElementById("option2");
-const content1 = document.getElementById("content1");
-const content2 = document.getElementById("content2");
+const tabs = document.querySelectorAll('[data-tab-target]');
+const tabsContents = document.querySelectorAll('[data-tab-content]');
 
-let chose = 1;
-
-const changeOption = () => {
-  chose == 1
-    ? ((content1.classList.value = "content content-active"),
-      (option1.classList.value = "option option-active"))
-    : ((content1.classList.value = "content"),
-      (option1.classList.value = "option"));
-  chose == 2
-    ? ((content2.classList.value = "content content-active"),
-      (option2.classList.value = "option option-active"))
-    : ((content2.classList.value = "content"),
-      (option2.classList.value = "option"));
-};
-
-option1.addEventListener("click", () => {
-  chose = 1;
-  changeOption();
-});
-option2.addEventListener("click", () => {
-  chose = 2;
-  changeOption();
+tabs.forEach((tab) => {
+  tab.addEventListener('click', (e) => {
+    const target = document.querySelector(tab.dataset.tabTarget);
+    tabsContents.forEach((tabContent) => tabContent.classList.remove('content-active'));
+    target.classList.add('content-active');
+    tabs.forEach((tab) => tab.classList.remove('option-active'));
+    e.currentTarget.classList.add('option-active');
+  });
 });
